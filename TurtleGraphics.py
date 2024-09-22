@@ -1,27 +1,95 @@
 #TurtleGraphics.py
-#Name:
-#Date:
-#Assignment:
+#Name: Ben Gish
+#Date: 9/22/2024
+#Assignment: Turtle
 
-import turtle #needed generally but not in CodeHS
-hideturtle() #hides the default turtle in CodeHS
+import turtle
+size = input("How long should the sides of the polygon be: ")
+sides= input("How many sides for the polygon: ")
 
 def drawSquare(myTurtle, size):
-    for i in range(4):
-        myTurtle.forward(size)
-        myTurtle.right(90)
+  for i in range(4):
+      myTurtle.forward(size)
+      myTurtle.right(90)
+sides = int(sides)
+size =int(size)
+
+angle=360 / sides
+def drawPolygon(myTurtle, sides):
+  myTurtle.up()
+  myTurtle.goto(25,-25)
+  myTurtle.down()
+
+  for i in range(sides):
+    myTurtle.forward(size)
+    myTurtle.right(angle)
+
+corner = input("When filling a corner of a square, choose the 1,2,3,or 4 corner: ")
+
+corner = int(corner)
+size2 = size / 2
+def fillCorner(myTurtle, corner):
+
+  myTurtle.up()
+  myTurtle.goto(-size2,size2)
+  myTurtle.down()
+
+  drawSquare(myTurtle, size)
+
+  if corner == 1:
+    myTurtle.position()
+  if corner == 2:
+    myTurtle.forward(size2)
+
+  if corner == 3:
+    myTurtle.right(90)
+    myTurtle.forward(size2)
+    myTurtle.left(90)
+
+  if corner == 4:
+    myTurtle.forward(size)
+    myTurtle.right(90)
+    myTurtle.forward(size2)
+
+  myTurtle.begin_fill()
+  drawSquare(myTurtle, size2)
+  myTurtle.end_fill()
+
+num = input("When stacking squares, how many squares should be stacked togther: ")
+
+
+num = int(num)
+def squaresInSquares(myTurtle, num):
+
+  size3= 10
+  myTurtle.up()
+  myTurtle.goto(-size3/2, size3/2)
+  myTurtle.down()
+
+  for i in range(num):
+    drawSquare(myTurtle, size3)
+    size3 = size3 + 10
+
+    myTurtle.up()
+    myTurtle.goto(-size3/2,size3/2)
+    myTurtle.down()
+
+
 
 
 def main():
-    myTurtle = turtle.Turtle()
-    # drawPolygon(myTurtle, 5) #draws a pentagon
-    # drawPolygon(myTurtle, 8) #draws an octogon
+  myTurtle = turtle.Turtle()
+  drawPolygon(myTurtle, sides)
+  fillCorner(myTurtle, corner)
+  squaresInSquares(myTurtle, num)
 
-    # fillCorner(myTurtle, 2) #draws a square with top right corner filled in.
-    # fillCorner(myTurtle, 3) #draws a square bottom left corner filled in.
 
-    # squaresInSquares(myTurtle, 5) #draws 5 concentric squares
-    # squaresInSquares(myTurtle, 3) #draws 3 concentric squares
-
+  # drawPolygon(myTurtle, 5) #draws a pentagon drawPolygon(myTurtle, 8)  #draws an octogon fillCorner(myTurtle, 2) 
+  #draws a square with top right    corner filled in.
+  # fillCorner(myTurtle, 3) #draws a square bottom left corner filled in.
+  #squaresInSquares(myTurtle, 5) #draws 5 concentric squares
+  #squaresInSquares(myTurtle, 3) #draws 3 concentric squares
 
 main()
+input("Hit enter to quit") #this keeps the turtle window from disappearing too soon.
+
